@@ -1,0 +1,5 @@
+aws_access_key_id: 'AKIAIPRKZV4UOEILRIZA'
+aws_secret_access_key: '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'
+region: 'us-west-2'
+fog_directory: 'gb-project-west'
+
