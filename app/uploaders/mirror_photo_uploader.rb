@@ -1,13 +1,20 @@
 require 'carrierwave/storage/fog'
-class PhotoUploader < CarrierWave::Uploader::Base
-  include CarrierWave::MiniMagick
-  include Sprockets::Rails::Helper
+class MirrorPhotoUploader < CarrierWave::Uploader::Base
 
-  storage :fog
+  # Include RMagick or MiniMagick support:
+  # include CarrierWave::RMagick
+   include CarrierWave::MiniMagick
 
+  # Choose what kind of storage to use for this uploader:
+  #storage :file
+   storage :fog
+
+  # Override the directory where uploaded files will be stored.
+  # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
+
 
    def initialize(*)
     super
@@ -15,16 +22,12 @@ class PhotoUploader < CarrierWave::Uploader::Base
       provider: "AWS",
       aws_access_key_id: ENV['aws_access_key_id'],
       aws_secret_access_key: ENV['aws_secret_access_key'],
-      region: ENV['region_primary']
+      region: ENV['region_secondary']
     }
-    self.fog_directory = ENV['fog_directory1']
+    self.fog_directory = ENV['fog_directory2']
   end
 
- # def scale(width, height)
- #  #   # do something
- #   end
-
-  version :thumbnail do
+ version :thumbnail do
    process :resize_to_fill => [20, 20]
   end
 
