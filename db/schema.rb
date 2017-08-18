@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727173850) do
+ActiveRecord::Schema.define(version: 20170808212644) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170727173850) do
     t.string "mirror_image"
     t.string "unique_key"
     t.string "generated_file_name"
+    t.string "original_file_name"
   end
 
 end
