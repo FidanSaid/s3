@@ -1,5 +1,7 @@
 aws_access_key_id: 'AKIAIPRKZV4UOEILRIZA'
 aws_secret_access_key: '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'
-region: 'us-west-2'
-fog_directory: 'gb-project-west'
+region_primary: 'us-west-2'
+region_secondary: 'us-east-2'
+fog_directory1: 'gb-project-west'
+fog_directory2: 'gb-project-east'
 
