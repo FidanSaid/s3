@@ -11,8 +11,6 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show 
       @post = Post.find(params[:id])
-
-    # send_file "#{Rails.root}/public#{@post.image.url}"
   
   end
 
@@ -36,24 +34,21 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-    @post.mirror_image = @post.image
-    @post.original_file_name =  File.basename(@post.image.url) 
-    @post.generated_file_name = generat_file_name( @post.original_file_name)
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-     else    
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
- 
-
-
+      @post = Post.new(post_params)
+      @post.mirror_image = @post.image
+      @post.original_file_name =  File.basename(@post.image.url) 
+      @post.generated_file_name = generat_file_name( @post.original_file_name) 
+      @post.file_extention = File.extname(@post.image.url) 
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render :show, status: :created, location: @post }
+       else    
+          format.html { render :new }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+         end
+        end
+   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
@@ -79,24 +74,22 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
-    
-def generat_file_name(file_name)
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def generat_file_name(file_name)
     x = [(0..9), ('A'..'Z')].map(&:to_a).flatten
     digt = (0...5).map { x[rand(x.length)] }.join
     return digt + file_name
-end
+  end
 
-
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :image, :mirror_image, :description, :unique_key, :generate_file_name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :image, :mirror_image, :description, :unique_key, :generate_file_name)
+  end
 end
 
 

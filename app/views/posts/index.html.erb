@@ -9,9 +9,9 @@
       <th>Description</th>
       <th>Image</th>
       <th>Mirror Image</th>
-       <th>Unique Key</th>
-        <th> Generated File Name</th>
-
+      <th>Unique Key</th>
+      <th>Generated File Name</th>
+      <th>File Extention</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,6 +25,7 @@
         <td><%= post.image %></td>
         <td><%= post.unique_key %></td>
         <td><%= post.generated_file_name%></td>
+        <td><%= post.file_extention%></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

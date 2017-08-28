@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.file_field :title %>
+    <%= f.text_field :title %>
   </div>
   <div class="field">
     <%= f.label :image %><br>
@@ -24,10 +24,7 @@
     <%= f.text_area :description %>
   </div>
 
-  <div class="field">
-    <%= f.label :generated_file_name %><br>
-    <%= f.file_field :generated_file_name %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
